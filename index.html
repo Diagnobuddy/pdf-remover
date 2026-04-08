@@ -44,22 +44,22 @@
 </head>
 <body>
 <div class="container">
-  <h1>📄 PDF Bulk Page Remover</h1>
-  <p class="sub">Bulk PDFs upload karo — Curelo ki pehli aur last branding page auto remove</p>
+  <h1>📄 PDF Single/Bulk Page Remover</h1>
+  <p class="sub">Upload PDFs and remove any pages — first, last, or custom range</p>
   
   <div id="status"></div>
   
   <div class="drop" id="drop">
     <p class="icon">📁</p>
-    <p>Click karo ya PDFs yahan drag & drop karo</p>
-    <p style="font-size:11px;color:#64748b;margin-top:4px">Multiple PDFs select kar sakte ho</p>
+    <p>Click or drag & drop PDFs here</p>
+    <p style="font-size:11px;color:#64748b;margin-top:4px">You can select multiple PDFs</p>
   </div>
   <input type="file" id="fin" accept=".pdf" multiple>
 
   <div class="row">
-    <label>Pehle se hatao:</label>
+    <label>Remove from start:</label>
     <input type="number" id="rf" min="0" max="10" value="1">
-    <label>Last se hatao:</label>
+    <label>Remove from end:</label>
     <input type="number" id="rl" min="0" max="10" value="1">
     <button class="btn go" id="goBtn" disabled>🚀 Process All</button>
     <button class="btn dl" id="dlAll" style="display:none">⬇️ Download All</button>
@@ -76,7 +76,7 @@
 
   <div id="list"></div>
   
-  <div class="foot">Sab kuch browser mein locally hota hai — koi data server pe nahi jaata | DiagnoBuddy Tool</div>
+  <div class="foot">Everything runs locally in your browser — no data is uploaded | DiagnoBuddy Tool</div>
 </div>
 
 <script>
@@ -84,7 +84,7 @@
 const script = document.createElement('script');
 script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';
 script.onload = () => showStatus('✅ PDF library loaded — ready to use!', 'ok');
-script.onerror = () => showStatus('❌ PDF library load nahi hua. Internet check karo aur page refresh karo.', 'err');
+script.onerror = () => showStatus('❌ PDF library failed to load. Check internet and refresh.', 'err');
 document.head.appendChild(script);
 
 let files = [];
@@ -116,7 +116,7 @@ function addFiles(fl) {
       added++;
     }
   }
-  if(added === 0) showStatus('❌ Sirf PDF files select karo!', 'err');
+  if(added === 0) showStatus('❌ Please select PDF files only!', 'err');
   else showStatus(`✅ ${added} PDF(s) added!`, 'ok');
   updateUI();
 }
